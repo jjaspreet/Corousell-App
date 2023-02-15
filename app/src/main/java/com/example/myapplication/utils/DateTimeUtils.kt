@@ -1,21 +1,40 @@
 package com.example.myapplication.utils
 
 import com.example.myapplication.data.remote.dto.CarousellDto
+import java.util.concurrent.TimeUnit
 
 object DateTimeUtils {
 
-    private fun getRespectiveTime(carouselList: List<CarousellDto>){
+    private fun getTimeDifference(milliseconds: Long): String {
 
-        carouselList.forEach {
+        // long minutes = (milliseconds / 1000) / 60;
+        val minutes = TimeUnit.MILLISECONDS.toMinutes(milliseconds)
 
+        val hours = TimeUnit.MILLISECONDS.toHours(milliseconds)
+
+        val days = TimeUnit.MILLISECONDS.toDays(milliseconds)
+
+        val time = if (days > 1) {
+            return "$days days ago"
+        } else if (hours > 1) {
+            return "$hours hours ago"
+        } else if (minutes > 1) {
+            return "$minutes minute ago"
+        } else {
+            ""
         }
 
+        return time
     }
 
-    private fun getTimeDifference(timeInMillis: Long){
+    fun getCurrentTime(carouselList: List<CarousellDto>): List<CarousellDto> {
+        val filteredList = ArrayList<CarousellDto>()
 
-        val then = timeInMillis
-        val now = System.currentTimeMillis()
+        carouselList.map {
+            it.currentTime = getTimeDifference((it.time_created).toLong())
+            filteredList.add(it)
+        }.toList()
 
+        return filteredList
     }
 }

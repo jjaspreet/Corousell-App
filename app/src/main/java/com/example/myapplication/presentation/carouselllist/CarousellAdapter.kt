@@ -1,5 +1,6 @@
 package com.example.myapplication.presentation.carouselllist
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -27,9 +28,12 @@ class CarousellAdapter(private val listener: OnItemClickListener) :
         }
 
         fun bind(item: CarousellDto) {
+            Log.d("Adapter", item.toString())
             binding.apply {
                 textView.text = item.title
                 rankTextView.text = item.rank.toString()
+                timeTextView.text =
+                    if (item.currentTime == null) "20 Days ago" else item.currentTime
             }
         }
     }
@@ -37,7 +41,7 @@ class CarousellAdapter(private val listener: OnItemClickListener) :
     companion object {
         private val OBJECT_COMPARATOR = object : DiffUtil.ItemCallback<CarousellDto>() {
             override fun areItemsTheSame(oldItem: CarousellDto, newItem: CarousellDto) =
-                oldItem.id == newItem.id
+                oldItem.currentTime == newItem.currentTime
 
             override fun areContentsTheSame(oldItem: CarousellDto, newItem: CarousellDto) =
                 oldItem == newItem
@@ -64,5 +68,5 @@ class CarousellAdapter(private val listener: OnItemClickListener) :
 }
 
 interface OnItemClickListener {
-    fun onItemClick(photo: CarousellDto)
+    fun onItemClick(item: CarousellDto)
 }

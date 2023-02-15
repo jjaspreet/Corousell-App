@@ -9,7 +9,7 @@ class CarousellRepositoryImpl @Inject constructor(
     private val carousellApi: CarousellApi
 ) : CarouselRepository {
 
-    override suspend fun getRickyAndMorty(): List<CarousellDto> {
+    override suspend fun getCarouselData(): List<CarousellDto> {
         return carousellApi.fetchCarousellData()
     }
 }

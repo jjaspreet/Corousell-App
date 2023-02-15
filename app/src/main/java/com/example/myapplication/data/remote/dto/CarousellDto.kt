@@ -1,10 +1,17 @@
 package com.example.myapplication.data.remote.dto
 
+import java.lang.reflect.Constructor
+
 data class CarousellDto(
     val banner_url: String,
     val description: String,
     val id: String,
     val rank: Int,
-    val time_created: Int,
-    val title: String
-)
+    var time_created: Int,
+    val title: String,
+    var currentTime: String
+
+){
+    constructor(banner_url: String, description: String, id: Int, rank: Int, time_created: Int, title: String)
+    :this("","", "", Int.MIN_VALUE, Int.MIN_VALUE, "", "")
+}

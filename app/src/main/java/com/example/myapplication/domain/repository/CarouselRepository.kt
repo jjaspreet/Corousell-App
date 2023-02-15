@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface CarouselRepository {
 
-    suspend fun getRickyAndMorty(): List<CarousellDto>
+    suspend fun getCarouselData(): List<CarousellDto>
 }

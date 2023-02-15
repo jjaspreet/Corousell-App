@@ -18,8 +18,8 @@ class CarouselUseCase @Inject constructor(
         try {
             emit(Resource.Loading())
             delay(3000)
-            val rickyMortyResponse = repository.getRickyAndMorty()
-            emit(Resource.Success(rickyMortyResponse))
+            val carouselResponse = repository.getCarouselData()
+            emit(Resource.Success(carouselResponse))
         } catch (httpException: HttpException) {
             emit(Resource.Error(httpException.localizedMessage ?: "An unexpected error occurred"))
         } catch (ioException: IOException) {

@@ -1,22 +1,24 @@
 package com.example.myapplication.presentation.carouselllist
 
-import android.opengl.Visibility
 import android.os.Bundle
-import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.myapplication.R
 import com.example.myapplication.common.toToast
 import com.example.myapplication.data.remote.dto.CarousellDto
 import com.example.myapplication.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class CarousellActivity : AppCompatActivity(), OnItemClickListener {
 
     private lateinit var binding: ActivityMainBinding
-    private  var carouselList: MutableList<CarousellDto> = mutableListOf()
+    private var carouselList: MutableList<CarousellDto> = mutableListOf()
 
     private val viewModel: CorouselViewModel by viewModels()
 
@@ -33,23 +35,20 @@ class CarousellActivity : AppCompatActivity(), OnItemClickListener {
         }
 
         binding.apply {
-
             recyclerView.adapter = adapter
         }
 
         lifecycleScope.launchWhenStarted {
-
             viewModel.carouselResponse.collect {
-
                 when (it) {
 
                     is CarouselUIState.Loading -> {
-                     binding.progressLayout.visibility = View.VISIBLE
+                        binding.progressLayout.visibility = View.VISIBLE
                     }
 
                     is CarouselUIState.Success -> {
                         binding.progressLayout.visibility = View.GONE
-                        it.data.let { carouselList->
+                        it.data.let { carouselList ->
 
                             adapter.submitList(carouselList)
                             this@CarousellActivity.carouselList.clear()
@@ -62,7 +61,7 @@ class CarousellActivity : AppCompatActivity(), OnItemClickListener {
                     }
 
                     else -> {
-
+                        //TODO: Respective handling , If needed
                     }
                 }
             }
@@ -70,7 +69,29 @@ class CarousellActivity : AppCompatActivity(), OnItemClickListener {
 
     }
 
-    override fun onItemClick(photo: CarousellDto) {
-        photo.title.toToast(this)
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.my_menu_style, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.popular_menu -> {
+                viewModel.fetchResponseByRank(carouselList)
+                true
+            }
+
+            R.id.recent_menu -> {
+                viewModel.fetchResponseByTime(carouselList)
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onItemClick(item: CarousellDto) {
+        item.title.toToast(this)
     }
 }

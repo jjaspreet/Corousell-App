@@ -8,17 +8,18 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class GetCarouselListByRankUseCase @Inject constructor(
-) {
+class GetCarouselListByTimeUseCase @Inject constructor()
+{
 
     operator fun invoke (carouselList: List<CarousellDto>): Flow<Resource<List<CarousellDto>>> = flow {
 
         try {
             emit(Resource.Loading())
             delay(1000)
-            val carouselResponse = carouselList.sortedBy { it.rank }.toMutableList()
+            val carouselResponse = carouselList.sortedBy { it.time_created }.toMutableList()
 
             emit(Resource.Success(DateTimeUtils.getCurrentTime(carouselResponse)))
+
         } catch (e : Exception){
             emit(Resource.Error("Couldn't reach server. Other exception."))
         }
