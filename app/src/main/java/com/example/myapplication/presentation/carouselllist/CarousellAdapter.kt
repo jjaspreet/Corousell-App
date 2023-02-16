@@ -40,7 +40,7 @@ class CarousellAdapter(
                 titleTextView.text = item.title
                 descriptionTextView.text = item.description
                 currentTimeTextBiew.text =
-                    if (item.currentTime == null) "20 Days ago" else item.currentTime
+                    item.currentTime
 
                 Glide.with(context).load(item.banner_url).centerCrop()
                     .transition(DrawableTransitionOptions.withCrossFade())
