@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.MyApplication" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/red_1</item>
+        <item name="colorPrimary">@color/theme_colour</item>
         <item name="colorPrimaryVariant">@color/maroon</item>
         <item name="colorOnPrimary">@color/red</item>
         <!-- Secondary brand color. -->
