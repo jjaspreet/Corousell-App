@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/_scaleTo4dp">
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_scaleTo8dp"
-        android:layout_marginEnd="@dimen/_scaleTo8dp"
-        android:paddingBottom="@dimen/_scaleTo12dp"
-        app:cardCornerRadius="@dimen/_scaleTo8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/_scaleTo8dp"
+    android:layout_marginStart="@dimen/_scaleTo8dp"
+    android:layout_marginEnd="@dimen/_scaleTo8dp"
+    android:paddingBottom="@dimen/_scaleTo12dp"
+    app:cardCornerRadius="@dimen/_scaleTo8dp"
+    android:layout_marginTop="@dimen/_scaleTo4dp"
+    android:layout_marginBottom="@dimen/_scaleTo4dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -40,6 +39,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/roboto_medium"
                 android:maxLines="2"
+                tools:text = "Southeast Asia-based mobile listings startup Carousell raises $85M"
                 android:padding="@dimen/_scaleTo4dp"
                 android:textColor="@color/text_colour"
                 android:textSize="@dimen/_scaleTo16sp"
@@ -55,6 +55,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/roboto_regular"
                 android:maxLines="2"
+                tools:text = "Carousell, the Singapore-based mobile listing service that operates across Southeast Asia, has pulled in an $85 million Series C fund as it seeks to strengthen its business among the region's competitive e-commerce landscape before expanding globally."
                 android:letterSpacing="0.1"
                 android:padding="@dimen/_scaleTo4dp"
                 android:textColor="@color/text_colour"
@@ -70,8 +71,12 @@
                 android:layout_marginBottom="@dimen/_scaleTo12dp"
                 android:padding="@dimen/_scaleTo4dp"
                 android:textColor="@color/grey"
+                tools:text = "4 days ago"
                 app:layout_constraintTop_toBottomOf="@id/descriptionTextView" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_scaleTo16dp"
+                app:layout_constraintTop_toBottomOf="@id/currentTimeTextBiew"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
