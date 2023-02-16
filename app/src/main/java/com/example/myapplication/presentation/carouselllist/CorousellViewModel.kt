@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.common.Resource
 import com.example.myapplication.data.remote.dto.CarousellDto
-import com.example.myapplication.domain.usecase.CarouselUseCase
-import com.example.myapplication.domain.usecase.GetCarouselListByRankUseCase
-import com.example.myapplication.domain.usecase.GetCarouselListByTimeUseCase
+import com.example.myapplication.domain.usecase.CarousellUseCase
+import com.example.myapplication.domain.usecase.GetCarousellListByRankUseCase
+import com.example.myapplication.domain.usecase.GetCarousellListByTimeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,15 +15,15 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
-class CorouselViewModel @Inject constructor(
-    private val useCase: CarouselUseCase,
-    private val getCarouselListByRankUseCase: GetCarouselListByRankUseCase,
-    private val getCarouselListByTimeUseCase: GetCarouselListByTimeUseCase
+class CorousellViewModel @Inject constructor(
+    private val useCase: CarousellUseCase,
+    private val getCarouselListByRankUseCase: GetCarousellListByRankUseCase,
+    private val getCarouselListByTimeUseCase: GetCarousellListByTimeUseCase
 ) : ViewModel() {
 
     private var _carousellResponse =
-        MutableStateFlow<CarouselUIState>(CarouselUIState.Empty)
-    val carouselResponse: StateFlow<CarouselUIState> = _carousellResponse
+        MutableStateFlow<CarousellUIState>(CarousellUIState.Empty)
+    val carouselResponse: StateFlow<CarousellUIState> = _carousellResponse
 
     init {
         fetchResponse()
@@ -34,13 +34,13 @@ class CorouselViewModel @Inject constructor(
         useCase().onEach { result ->
             when (result) {
                 is Resource.Loading -> {
-                    _carousellResponse.value = CarouselUIState.Loading
+                    _carousellResponse.value = CarousellUIState.Loading
                 }
                 is Resource.Success -> {
                    fetchResponseByTime(result.data!!)
                 }
                 is Resource.Error -> {
-                    _carousellResponse.value = CarouselUIState.Error(
+                    _carousellResponse.value = CarousellUIState.Error(
                         result.message ?: "An unexpected error occurred"
                     )
                 }
@@ -54,13 +54,13 @@ class CorouselViewModel @Inject constructor(
         getCarouselListByRankUseCase(carouselList).onEach { result ->
             when (result) {
                 is Resource.Loading -> {
-                    _carousellResponse.value = CarouselUIState.Loading
+                    _carousellResponse.value = CarousellUIState.Loading
                 }
                 is Resource.Success -> {
-                    _carousellResponse.value = CarouselUIState.Success(result.data!!)
+                    _carousellResponse.value = CarousellUIState.Success(result.data!!)
                 }
                 is Resource.Error -> {
-                    _carousellResponse.value = CarouselUIState.Error(
+                    _carousellResponse.value = CarousellUIState.Error(
                         result.message ?: "An unexpected error occurred"
                     )
                 }
@@ -73,13 +73,13 @@ class CorouselViewModel @Inject constructor(
             getCarouselListByTimeUseCase(carouselList).onEach { result ->
                 when (result) {
                     is Resource.Loading -> {
-                        _carousellResponse.value = CarouselUIState.Loading
+                        _carousellResponse.value = CarousellUIState.Loading
                     }
                     is Resource.Success -> {
-                        _carousellResponse.value = CarouselUIState.Success(result.data!!)
+                        _carousellResponse.value = CarousellUIState.Success(result.data!!)
                     }
                     is Resource.Error -> {
-                        _carousellResponse.value = CarouselUIState.Error(
+                        _carousellResponse.value = CarousellUIState.Error(
                             result.message ?: "An unexpected error occurred"
                         )
                     }

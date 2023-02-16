@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -22,7 +20,7 @@ class CarousellActivity : AppCompatActivity(), OnItemClickListener {
     private lateinit var binding: ActivityMainBinding
     private var carouselList: MutableList<CarousellDto> = mutableListOf()
 
-    private val viewModel: CorouselViewModel by viewModels()
+    private val viewModel: CorousellViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,11 +38,11 @@ class CarousellActivity : AppCompatActivity(), OnItemClickListener {
             viewModel.carouselResponse.collect {
                 when (it) {
 
-                    is CarouselUIState.Loading -> {
+                    is CarousellUIState.Loading -> {
                         binding.progressLayout.visibility = View.VISIBLE
                     }
 
-                    is CarouselUIState.Success -> {
+                    is CarousellUIState.Success -> {
 
                         binding.progressLayout.visibility = View.GONE
                         it.data.let { carouselList ->
@@ -55,7 +53,7 @@ class CarousellActivity : AppCompatActivity(), OnItemClickListener {
                         }
                     }
 
-                    is CarouselUIState.Error -> {
+                    is CarousellUIState.Error -> {
                         binding.progressLayout.visibility = View.GONE
                     }
 

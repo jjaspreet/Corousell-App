@@ -3,7 +3,7 @@ package com.example.myapplication.di
 import com.example.myapplication.common.Constants
 import com.example.myapplication.data.remote.CarousellApi
 import com.example.myapplication.data.repository.CarousellRepositoryImpl
-import com.example.myapplication.domain.repository.CarouselRepository
+import com.example.myapplication.domain.repository.CarousellRepository
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -30,7 +30,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideCarousellRepository(api: CarousellApi): CarouselRepository {
+    fun provideCarousellRepository(api: CarousellApi): CarousellRepository {
         return CarousellRepositoryImpl(api)
     }
 
