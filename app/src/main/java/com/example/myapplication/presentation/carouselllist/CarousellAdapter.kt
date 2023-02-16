@@ -1,15 +1,22 @@
 package com.example.myapplication.presentation.carouselllist
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.example.myapplication.R
 import com.example.myapplication.data.remote.dto.CarousellDto
 import com.example.myapplication.databinding.ItemCarousellBinding
 
-class CarousellAdapter(private val listener: OnItemClickListener) :
+class CarousellAdapter(
+    private val context: Context,
+    private val listener: OnItemClickListener
+    ) :
     ListAdapter<CarousellDto, CarousellAdapter.CarousellViewHolder>(OBJECT_COMPARATOR) {
 
     inner class CarousellViewHolder(private val binding: ItemCarousellBinding) :
@@ -30,10 +37,14 @@ class CarousellAdapter(private val listener: OnItemClickListener) :
         fun bind(item: CarousellDto) {
             Log.d("Adapter", item.toString())
             binding.apply {
-                textView.text = item.title
-                rankTextView.text = item.rank.toString()
-                timeTextView.text =
+                titleTextView.text = item.title
+                descriptionTextView.text = item.description
+                currentTimeTextBiew.text =
                     if (item.currentTime == null) "20 Days ago" else item.currentTime
+
+                Glide.with(context).load(item.banner_url).centerCrop()
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .error(R.drawable.baseline_error_24).into(imageTextView)
             }
         }
     }

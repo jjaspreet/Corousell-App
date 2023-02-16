@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -28,11 +30,7 @@ class CarousellActivity : AppCompatActivity(), OnItemClickListener {
         val view = binding.root
         setContentView(view)
 
-        val adapter = CarousellAdapter(this)
-
-        binding.button.setOnClickListener {
-            viewModel.fetchResponseByRank(carouselList)
-        }
+        val adapter = CarousellAdapter(this, this)
 
         binding.apply {
             recyclerView.adapter = adapter
@@ -47,6 +45,7 @@ class CarousellActivity : AppCompatActivity(), OnItemClickListener {
                     }
 
                     is CarouselUIState.Success -> {
+
                         binding.progressLayout.visibility = View.GONE
                         it.data.let { carouselList ->
 
@@ -92,6 +91,6 @@ class CarousellActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     override fun onItemClick(item: CarousellDto) {
-        item.title.toToast(this)
+        item.title.toToast(this).show()
     }
 }

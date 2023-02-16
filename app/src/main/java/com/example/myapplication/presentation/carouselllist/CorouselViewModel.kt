@@ -37,7 +37,7 @@ class CorouselViewModel @Inject constructor(
                     _carousellResponse.value = CarouselUIState.Loading
                 }
                 is Resource.Success -> {
-                    _carousellResponse.value = CarouselUIState.Success(result.data!!)
+                   fetchResponseByTime(result.data!!)
                 }
                 is Resource.Error -> {
                     _carousellResponse.value = CarouselUIState.Error(
