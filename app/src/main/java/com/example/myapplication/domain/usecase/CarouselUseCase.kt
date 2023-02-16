@@ -17,7 +17,7 @@ class CarouselUseCase @Inject constructor(
     operator fun invoke(): Flow<Resource<List<CarousellDto>>> = flow {
         try {
             emit(Resource.Loading())
-            delay(3000)
+            delay(1000)
             val carouselResponse = repository.getCarouselData()
             emit(Resource.Success(carouselResponse))
         } catch (httpException: HttpException) {

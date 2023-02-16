@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="_scaleTo16dp">16dp</dimen>
+    <dimen name="_scaleTo4dp">4dp</dimen>
+    <dimen name="_scaleTo8dp">8dp</dimen>
+    <dimen name="_scaleTo12dp">12dp</dimen>
+    <dimen name="_scaleTo64dp">64dp</dimen>
+
+    <!--For text size -->
+    <dimen name="_scaleTo12sp">12sp</dimen>
+    <dimen name="_scaleTo14sp">14sp</dimen>
+    <dimen name="_scaleTo16sp">16sp</dimen>
+    <dimen name="_scaleTo22sp">22sp</dimen>
+</resources>
