@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.myapplication'
+    namespace 'com.example.carousell'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.myapplication"
+        applicationId "com.example.carousell"
         minSdk 24
         targetSdk 33
         versionCode 1
@@ -76,6 +76,14 @@ dependencies {
     def fragment_version = "1.5.5"
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
 
-    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
+    //Call Adapter
+    def call_adapter_version = "0.9.2"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$call_adapter_version"
+
+    //Turbine Library
+    def turbine_version = "0.12.1"
+    testImplementation "app.cash.turbine:turbine:$turbine_version"
+
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
 
 }
