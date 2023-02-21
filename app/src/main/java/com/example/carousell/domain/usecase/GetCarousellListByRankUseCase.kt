@@ -16,7 +16,7 @@ class GetCarousellListByRankUseCase @Inject constructor(
             emit(Resource.Loading())
             val carouselResponse = carouselList.sortedBy { it.rank }.toMutableList()
 
-            emit(Resource.Success(DateTimeUtils.getCurrentTime(carouselResponse)))
+            emit(Resource.Success(DateTimeUtils.getListInReadableTimeFormat(carouselResponse)))
         } catch (e : Exception){
             emit(Resource.Error(e.localizedMessage!!))
         }

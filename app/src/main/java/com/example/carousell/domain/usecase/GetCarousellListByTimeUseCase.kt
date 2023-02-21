@@ -16,7 +16,7 @@ class GetCarousellListByTimeUseCase @Inject constructor()
             emit(Resource.Loading())
             val carouselResponse = carouselList.sortedBy { it.time_created }.toMutableList()
 
-            emit(Resource.Success(DateTimeUtils.getCurrentTime(carouselResponse)))
+            emit(Resource.Success(DateTimeUtils.getListInReadableTimeFormat(carouselResponse)))
 
         } catch (e : Exception){
             emit(Resource.Error(e.localizedMessage!!))
