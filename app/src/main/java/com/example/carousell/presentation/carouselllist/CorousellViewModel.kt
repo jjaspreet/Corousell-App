@@ -21,8 +21,9 @@ class CorousellViewModel @Inject constructor(
     private val getCarouselListByTimeUseCase: GetCarousellListByTimeUseCase
 ) : ViewModel() {
 
-    private var _carousellResponse =
-        MutableStateFlow<CarousellUIState>(CarousellUIState.Empty)
+    private lateinit var carousellResponse: List<CarousellDto>
+
+    private var _carousellResponse = MutableStateFlow<CarousellUIState>(CarousellUIState.Empty)
     val carouselResponse: StateFlow<CarousellUIState> = _carousellResponse
 
     init {
@@ -37,7 +38,9 @@ class CorousellViewModel @Inject constructor(
                     _carousellResponse.value = CarousellUIState.Loading
                 }
                 is Resource.Success -> {
-                   fetchResponseByTime(result.data!!)
+                    carousellResponse = result.data!!
+                    fetchResponseByTime()
+
                 }
                 is Resource.Error -> {
                     _carousellResponse.value = CarousellUIState.Error(
@@ -46,12 +49,11 @@ class CorousellViewModel @Inject constructor(
                 }
             }
         }.launchIn(viewModelScope)
-
     }
 
-    fun fetchResponseByRank(carouselList: List<CarousellDto>) {
+    fun fetchResponseByRank() {
 
-        getCarouselListByRankUseCase(carouselList).onEach { result ->
+        getCarouselListByRankUseCase(carousellResponse).onEach { result ->
             when (result) {
                 is Resource.Loading -> {
                     _carousellResponse.value = CarousellUIState.Loading
@@ -68,24 +70,23 @@ class CorousellViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-        fun fetchResponseByTime(carouselList: List<CarousellDto>) {
+    fun fetchResponseByTime() {
 
-            getCarouselListByTimeUseCase(carouselList).onEach { result ->
-                when (result) {
-                    is Resource.Loading -> {
-                        _carousellResponse.value = CarousellUIState.Loading
-                    }
-                    is Resource.Success -> {
-                        _carousellResponse.value = CarousellUIState.Success(result.data!!)
-                    }
-                    is Resource.Error -> {
-                        _carousellResponse.value = CarousellUIState.Error(
-                            result.message ?: "An unexpected error occurred"
-                        )
-                    }
+        getCarouselListByTimeUseCase(carousellResponse).onEach { result ->
+            when (result) {
+                is Resource.Loading -> {
+                    _carousellResponse.value = CarousellUIState.Loading
                 }
-            }.launchIn(viewModelScope)
-
-        }
+                is Resource.Success -> {
+                    _carousellResponse.value = CarousellUIState.Success(result.data!!)
+                }
+                is Resource.Error -> {
+                    _carousellResponse.value = CarousellUIState.Error(
+                        result.message ?: "An unexpected error occurred"
+                    )
+                }
+            }
+        }.launchIn(viewModelScope)
     }
+}
 

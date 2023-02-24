@@ -24,7 +24,7 @@ class CarousellUseCase @Inject constructor(
             emit(Resource.Error(httpException.localizedMessage ?: "An unexpected error occurred"))
         } catch (ioException: IOException) {
             emit(Resource.Error("Couldn't reach server. Check your internet connection."))
-        }catch (e : Exception){
+        } catch (e: Exception) {
             emit(Resource.Error("Couldn't reach server. Other exception."))
         }
     }

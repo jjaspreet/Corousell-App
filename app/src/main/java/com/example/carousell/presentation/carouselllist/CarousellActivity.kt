@@ -18,7 +18,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class CarousellActivity : AppCompatActivity(), OnItemClickListener {
 
     private lateinit var binding: ActivityMainBinding
-    private var carouselList: MutableList<CarousellDto> = mutableListOf()
 
     private val viewModel: CorousellViewModel by viewModels()
 
@@ -46,10 +45,7 @@ class CarousellActivity : AppCompatActivity(), OnItemClickListener {
 
                         binding.progressLayout.visibility = View.GONE
                         it.data.let { carouselList ->
-
                             adapter.submitList(carouselList)
-                            this@CarousellActivity.carouselList.clear()
-                            this@CarousellActivity.carouselList = carouselList.toMutableList()
                         }
                     }
 
@@ -75,12 +71,12 @@ class CarousellActivity : AppCompatActivity(), OnItemClickListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.popular_menu -> {
-                viewModel.fetchResponseByRank(carouselList)
+                viewModel.fetchResponseByRank()
                 true
             }
 
             R.id.recent_menu -> {
-                viewModel.fetchResponseByTime(carouselList)
+                viewModel.fetchResponseByTime()
                 true
             }
 
