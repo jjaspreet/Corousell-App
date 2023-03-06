@@ -16,8 +16,7 @@ import com.example.carousell.databinding.ItemCarousellBinding
 class CarousellAdapter(
     private val context: Context,
     private val listener: OnItemClickListener
-    ) :
-    ListAdapter<CarousellDto, CarousellAdapter.CarousellViewHolder>(OBJECT_COMPARATOR) {
+) : ListAdapter<CarousellDto, CarousellAdapter.CarousellViewHolder>(OBJECT_COMPARATOR) {
 
     inner class CarousellViewHolder(private val binding: ItemCarousellBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -39,8 +38,7 @@ class CarousellAdapter(
             binding.apply {
                 titleTextView.text = item.title
                 descriptionTextView.text = item.description
-                currentTimeTextBiew.text =
-                    item.currentTime
+                currentTimeTextBiew.text = item.currentTime
 
                 Glide.with(context).load(item.banner_url).centerCrop()
                     .transition(DrawableTransitionOptions.withCrossFade())
@@ -52,7 +50,7 @@ class CarousellAdapter(
     companion object {
         private val OBJECT_COMPARATOR = object : DiffUtil.ItemCallback<CarousellDto>() {
             override fun areItemsTheSame(oldItem: CarousellDto, newItem: CarousellDto) =
-                oldItem.currentTime == newItem.currentTime
+                oldItem.id == newItem.id
 
             override fun areContentsTheSame(oldItem: CarousellDto, newItem: CarousellDto) =
                 oldItem == newItem
@@ -68,7 +66,6 @@ class CarousellAdapter(
     }
 
     override fun onBindViewHolder(holder: CarousellViewHolder, position: Int) {
-
 
         val currentItem = getItem(position)
 

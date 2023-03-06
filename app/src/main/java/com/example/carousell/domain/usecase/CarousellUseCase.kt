@@ -3,7 +3,6 @@ package com.example.carousell.domain.usecase
 import com.example.carousell.common.Resource
 import com.example.carousell.data.remote.dto.CarousellDto
 import com.example.carousell.domain.repository.CarousellRepository
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import okio.IOException
@@ -17,7 +16,6 @@ class CarousellUseCase @Inject constructor(
     operator fun invoke(): Flow<Resource<List<CarousellDto>>> = flow {
         try {
             emit(Resource.Loading())
-            delay(1000)
             val carouselResponse = repository.getCarousellData()
             emit(Resource.Success(carouselResponse))
         } catch (httpException: HttpException) {

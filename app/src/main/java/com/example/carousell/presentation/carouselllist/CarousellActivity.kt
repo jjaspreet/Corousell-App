@@ -3,7 +3,8 @@ package com.example.carousell.presentation.carouselllist
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -38,19 +39,18 @@ class CarousellActivity : AppCompatActivity(), OnItemClickListener {
                 when (it) {
 
                     is CarousellUIState.Loading -> {
-                        binding.progressLayout.visibility = View.VISIBLE
+                        binding.progressLayout.visibility = VISIBLE
                     }
 
                     is CarousellUIState.Success -> {
-
-                        binding.progressLayout.visibility = View.GONE
+                        binding.progressLayout.visibility = GONE
                         it.data.let { carouselList ->
                             adapter.submitList(carouselList)
                         }
                     }
 
                     is CarousellUIState.Error -> {
-                        binding.progressLayout.visibility = View.GONE
+                        binding.progressLayout.visibility = GONE
                     }
 
                     else -> {
@@ -85,6 +85,6 @@ class CarousellActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     override fun onItemClick(item: CarousellDto) {
-        item.title.toToast(this).show()
+        (item.rank).toString().toToast(this).show()
     }
 }

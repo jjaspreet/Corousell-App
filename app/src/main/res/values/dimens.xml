@@ -4,6 +4,7 @@
     <dimen name="_scaleTo4dp">4dp</dimen>
     <dimen name="_scaleTo8dp">8dp</dimen>
     <dimen name="_scaleTo12dp">12dp</dimen>
+    <dimen name="_scaleTo50dp">50dp</dimen>
     <dimen name="_scaleTo64dp">64dp</dimen>
 
     <!--For text size -->

@@ -6,17 +6,19 @@ import java.util.*
 
 object DateTimeUtils {
 
+    private const val TIME_FORMAT = "dd-MM-yyyy HH:mm:ss"
+
     fun getDateForRespectiveMilliseconds(milliseconds: Long): String {
         val date = Date()
         date.time = milliseconds
-        return SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(date)
+        return SimpleDateFormat(TIME_FORMAT, Locale.getDefault()).format(date)
     }
 
     fun findDifference(
         start_date: String?, end_date: String?
     ): String {
 
-        val sdf = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault())
+        val sdf = SimpleDateFormat(TIME_FORMAT, Locale.getDefault())
 
         try {
 
@@ -69,6 +71,6 @@ object DateTimeUtils {
     }
 
     fun getCurrentDateAndTime(): String {
-        return SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(Date())
+        return SimpleDateFormat(TIME_FORMAT, Locale.getDefault()).format(Date())
     }
 }
